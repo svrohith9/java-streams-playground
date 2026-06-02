@@ -9,7 +9,7 @@ class H_ReverseANumber {
 
   @Test
   @Disabled
-  static void reverseANumber() {
+  void reverseANumber() {
     final var input = DummyData.fakerNumber();
     var mySolution = EasyNumbersProblemSolution.reverseANumber(input);
     int yourSolution = 0;

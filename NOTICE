@@ -1,0 +1,21 @@
+Java Streams Playground
+Copyright 2026 svrohith9
+
+This product includes software originally developed in the
+"Streams-API-Practices" project by Zahid Fayaz Khan (ZahidFKhan),
+licensed under the Apache License, Version 2.0:
+https://github.com/ZahidFKhan/Streams-API-Practices
+
+Significant modifications in this derivative work include:
+  - An original, records-based "Explorers' Guild" dataset and rewritten
+    lesson content replacing the original example dataset.
+  - A gamified "Stream Quest" modern Java learning track (records, sealed
+    types, pattern matching, record patterns, sequenced collections,
+    teeing, gatherers, and more).
+  - Additional practice problems and Java 25 Stream Gatherers exercises.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy
+of the License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0

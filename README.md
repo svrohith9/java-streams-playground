@@ -6,12 +6,15 @@
 
 *Records · Sealed Types · Pattern Matching · Record Patterns · Sequenced Collections · Gatherers · Virtual Threads*
 
+[![Java CI](https://github.com/svrohith9/java-streams-playground/actions/workflows/maven.yml/badge.svg)](https://github.com/svrohith9/java-streams-playground/actions/workflows/maven.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Java](https://img.shields.io/badge/Java-8%20→%2025-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![Java](https://img.shields.io/badge/Java-21%20%7C%2025-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Build](https://img.shields.io/badge/Build-Maven-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 [![Tests](https://img.shields.io/badge/Tests-JUnit_5-25A162?logo=junit5&logoColor=white)](https://junit.org/junit5/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
-[![Star this repo](https://img.shields.io/badge/⭐-Star_this_repo-yellow.svg)](#)
+
+[![GitHub stars](https://img.shields.io/github/stars/svrohith9/java-streams-playground?style=social)](https://github.com/svrohith9/java-streams-playground/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/svrohith9/java-streams-playground?style=social)](https://github.com/svrohith9/java-streams-playground/network/members)
 
 **If this helps you learn, please ⭐ star the repo — it helps others find it too!**
 
@@ -168,24 +171,26 @@ src/test/java/com/github/streams/
 ## 🤝 Contributing
 
 Contributions are very welcome — new problems, better explanations, more modern-Java levels!
+Beginners especially: this is a great place to make your first open-source PR. 🌱
 
-1. Fork the repo and create a branch.
-2. Add your exercise following the existing pattern (a `@Disabled` test + a reference solution).
-3. Keep new Java 25-only code gated with `@EnabledOnJre(JRE.JAVA_25)`.
-4. Open a pull request describing what learners will gain.
+- 📖 Read the [**Contributing Guide**](.github/CONTRIBUTING.md) for setup and the exercise pattern.
+- 🤝 Be kind — we follow a [**Code of Conduct**](.github/CODE_OF_CONDUCT.md).
+- 🧩 Have an idea or found a bug? [**Open an issue**](https://github.com/svrohith9/java-streams-playground/issues/new/choose).
+- 🔒 Security concern? See our [**Security Policy**](SECURITY.md).
 
-Found a bug or have an idea? [Open an issue](https://github.com/svrohith9/java-streams-playground/issues).
+The short version: fork → branch → add a `@Disabled` test + reference solution → keep Java 25-only
+code gated with `@EnabledOnJre(JRE.JAVA_25)` → make sure `mvn test` is green → open a PR. 🚀
 
 ---
 
 ## 📜 License & Credits
 
-Released under the [Apache License 2.0](LICENSE).
+Released under the [Apache License 2.0](LICENSE) — see the [NOTICE](NOTICE) for attribution details.
 
 Built on the excellent original
 [Streams-API-Practices](https://github.com/ZahidFKhan/Streams-API-Practices) by **ZahidFKhan**, and
-extended here with a gamified **Modern Java (Stream Quest)** learning track and Java 25 Gatherers
-coverage.
+extended here with an original records-based dataset, a gamified **Modern Java (Stream Quest)**
+learning track, and Java 25 Gatherers coverage.
 
 <div align="center">
 

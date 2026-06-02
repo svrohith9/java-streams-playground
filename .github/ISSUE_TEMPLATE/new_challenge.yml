@@ -1,0 +1,39 @@
+name: 🧩 New challenge / feature idea
+description: Suggest a new practice problem, Stream Quest level, or modern Java feature to cover.
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of idea is this?
+      options:
+        - New easy problem
+        - New medium problem
+        - New hard problem
+        - New Stream Quest level (modern Java)
+        - New lesson / explanation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: feature
+    attributes:
+      label: Java feature / concept
+      description: Which Stream operation, collector, or language feature does it teach?
+      placeholder: "Collectors.flatMapping, record patterns, Gatherers.mapConcurrent…"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the challenge
+      description: The problem statement, an example input, and the expected output.
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Would you like to implement it?
+      options:
+        - label: I'd like to open a PR for this myself 🙌
