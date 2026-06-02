@@ -13,7 +13,7 @@
         </contributor>
     </contributors>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.plugin.validation>BRIEF</maven.plugin.validation>
@@ -55,23 +55,16 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>23</source>
-                    <target>23</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
 
     <profiles>
         <profile>
-            <!-- TO DISABLE, GATHERER TEST CASES IN JDK 17. -->
-            <id>enable-upto-jdk17-testcases</id>
+            <!-- On any JDK below 25 the Stream Gatherers API is unavailable, so exclude every
+                 gatherer-using test from compilation. The build (and all non-gatherer exercises)
+                 then works on JDK 21 too; the gatherer tests compile and run only on JDK 25. -->
+            <id>exclude-gatherer-tests-below-jdk25</id>
             <activation>
                 <jdk>[1.6, 25)</jdk>
             </activation>
@@ -89,6 +82,7 @@
                                 <configuration>
                                     <testExcludes>
                                         <testExclude>**/gatherers/*.java</testExclude>
+                                        <testExclude>**/Level10_GatherersChallenge.java</testExclude>
                                     </testExcludes>
                                 </configuration>
                             </execution>
