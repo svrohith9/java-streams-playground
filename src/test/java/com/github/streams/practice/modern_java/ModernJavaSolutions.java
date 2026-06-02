@@ -91,6 +91,14 @@ public final class ModernJavaSolutions {
     return party.stream().collect(Collectors.groupingBy(Hero::heroClass, Collectors.counting()));
   }
 
+  /**
+   * LEVEL 11 — partitioningBy: split the party into veterans ({@code level >= veteranLevel}) under
+   * key {@code true} and rookies under key {@code false}. Both keys always exist, even if empty.
+   */
+  public static Map<Boolean, List<Hero>> partitionByVeteran(List<Hero> party, int veteranLevel) {
+    return party.stream().collect(Collectors.partitioningBy(hero -> hero.level() >= veteranLevel));
+  }
+
   /** LEVEL 8 — Optional + max: the highest-level hero, if the party is not empty. */
   public static Optional<Hero> strongestHero(List<Hero> party) {
     return party.stream().max(java.util.Comparator.comparingInt(Hero::level));

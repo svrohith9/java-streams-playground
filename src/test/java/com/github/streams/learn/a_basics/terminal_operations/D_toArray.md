@@ -1,30 +1,33 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
-        return List.of(
-                new Footballer("Messi", 32, Gender.MALE, List.of("CF","CAM", "RF")),
-                new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-                new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-                new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-                new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-                new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-                new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-                new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-        );
-    }
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
+    return List.of(
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
+}
 ```
 
-# To Array:
+# To Array
 
-If we need to get an array out of the stream, we can simply use toArray().
+When you need a plain array instead of a stream, `toArray` does the job. Passing the array
+constructor reference (`Explorer[]::new`) gives you a typed array rather than `Object[]`.
 
 ```java
-        Footballer[] femaleFootballers = footballerList.stream()
-                .filter(footballer -> footballer.getGender().equals(Gender.FEMALE))
-                .toArray(Footballer[]::new);
+Explorer[] mystics = explorers.stream()
+        .filter(explorer -> explorer.guild() == Guild.MYSTICS)
+        .toArray(Explorer[]::new);
 
-        System.out.println("femaleFootballers = " + Arrays.asList(femaleFootballers));
-        //prints To Array femaleFootballers = [Footballer{name='Jennifer', age=29, gender=FEMALE, positions=[CF, CAM]}, Footballer{name='Jana', age=17, gender=FEMALE, positions=[CB]}, Footballer{name='Alexia', age=25, gender=FEMALE, positions=[CAM, RF, LF]}]
-
+System.out.println("mystics = " + Arrays.toString(mystics));
+// mystics = [Lyra (MYSTICS), Mira (MYSTICS), Senna (MYSTICS)]
 ```

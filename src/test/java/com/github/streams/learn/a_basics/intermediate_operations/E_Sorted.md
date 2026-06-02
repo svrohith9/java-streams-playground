@@ -1,61 +1,48 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
     return List.of(
-            new Footballer("Messi", 32, Gender.MALE, List.of("CF", "CAM", "RF")),
-            new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-            new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-            new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-            new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-            new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-            new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-            new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-    );
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
 }
 ```
 
-# Sorted:
+# Sorted
 
-The `sorted` method is used to sort the stream.
+`sorted` reorders the stream. With no argument it uses natural ordering; pass a `Comparator` to sort
+by any key — and chain `thenComparing` to break ties.
 
-#### Example: Sort footballers by Gender and if they have the same gender sort by their names.
+#### Example: sort by guild, then alphabetically by name within each guild.
+
 ```java
-        List<Footballer>  sortByGenderAndName= footballerList.stream()
-                .sorted(Comparator.comparing(Footballer::getGender).thenComparing(Footballer::getName))
-                .collect(Collectors.toList());
-
+List<Explorer> byGuildThenName = explorers.stream()
+        .sorted(Comparator.comparing(Explorer::guild).thenComparing(Explorer::name))
+        .toList();
 ```
 
 #### Output:
 
-```java
-sortByGenderAndName =[
-
-Footballer {
-    name = 'Arthur', age = 23, gender = MALE, positions =[CM, CAM]},
-
-Footballer {
-    name = 'Ibrahim', age = 28, gender = MALE, positions =[CF, CAM, LF]},
-
-Footballer {
-    name = 'Messi', age = 32, gender = MALE, positions =[CF, CAM, RF]},
-
-Footballer {
-    name = 'Surinder', age = 20, gender = MALE, positions =[CM, CDM]},
-
-Footballer {
-    name = 'Cristiano Ronaldo', age = 27, gender = MALE, positions =[GK]},
-
-Footballer {
-    name = 'Alexia', age = 25, gender = FEMALE, positions =[CAM, RF, LF]},
-
-Footballer {
-    name = 'Jana', age = 17, gender = FEMALE, positions =[CB]},
-
-Footballer {
-    name = 'Jennifer', age = 29, gender = FEMALE, positions =[CF, CAM]},
-        ]
+```
+Bram   (RANGERS)
+Doran  (RANGERS)
+Idris  (RANGERS)
+Kael   (RANGERS)
+Theron (RANGERS)
+Lyra   (MYSTICS)
+Mira   (MYSTICS)
+Senna  (MYSTICS)
 ```
 
-
+> `Comparator.comparing(Explorer::guild)` orders by the enum's declaration order, so `RANGERS`
+> (declared first) comes before `MYSTICS`.

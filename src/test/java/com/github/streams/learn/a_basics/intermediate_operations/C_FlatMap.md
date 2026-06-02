@@ -1,32 +1,36 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
-        return List.of(
-                new Footballer("Messi", 32, Gender.MALE, List.of("CF","CAM", "RF")),
-                new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-                new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-                new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-                new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-                new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-                new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-                new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-        );
-    }
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
+    return List.of(
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
+}
 ```
 
-# FlatMap:
+# FlatMap
 
-A stream can hold complex data structures like Stream<List<String>>. In cases like this, `flatMap()` helps us to flatten
-the data structure to simplify further operations.
+When each element itself holds a collection (here `List<String>` of skills), the stream is nested —
+`Stream<List<String>>`. `flatMap` flattens those inner collections into a single stream of elements
+so you can keep chaining.
 
-#### Example: Get all positions of male footballers less than 30 years old.
+#### Example: list every skill held by Rangers under 30 (duplicates kept).
 
 ```java
-        String allPositionsOfMaleLessThan30y = footballerList.stream()
-        .filter(footballer -> footballer.getGender().equals(Gender.MALE))
-        .filter(footballer -> footballer.getAge() < 30)
-        .map(Footballer::getPositions)
+String rangerSkills = explorers.stream()
+        .filter(explorer -> explorer.guild() == Guild.RANGERS)
+        .filter(explorer -> explorer.age() < 30)
+        .map(Explorer::skills)
         .flatMap(Collection::stream)
         .collect(Collectors.joining(","));
 ```
@@ -34,5 +38,5 @@ the data structure to simplify further operations.
 #### Output:
 
 ```
-allPositionsOfMaleLessThan30y = CF,CAM,LF,CM,CAM,GK,CM,CDM
+rangerSkills = Tracking,Archery,Foraging,Climbing,Archery,Diving,Climbing,Cartography
 ```

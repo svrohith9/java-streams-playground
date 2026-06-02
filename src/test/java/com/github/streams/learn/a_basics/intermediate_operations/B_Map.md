@@ -1,31 +1,34 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
-        return List.of(
-                new Footballer("Messi", 32, Gender.MALE, List.of("CF","CAM", "RF")),
-                new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-                new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-                new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-                new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-                new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-                new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-                new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-        );
-    }
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
+    return List.of(
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
+}
 ```
 
-# Map:
+# Map
 
-The `map()` produces a new stream after applying a function to each element of the original stream. The new stream could
-be of different type.
+`map` transforms every element by applying a function, producing a stream of the function's results.
+The output type can differ from the input type — here `Explorer` becomes `Integer`.
 
-#### Example: Get all females footballers over 24 years old and count them.
+#### Example: how many Mystics are older than 24?
 
 ```java
-        long femalesMoreThan24y = footballerList.stream()
-        .filter(footballer -> footballer.getGender().equals(Gender.FEMALE))
-        .map(Footballer::getAge)
+long seasonedMystics = explorers.stream()
+        .filter(explorer -> explorer.guild() == Guild.MYSTICS)
+        .map(Explorer::age)
         .filter(age -> age > 24)
         .count();
 ```
@@ -33,5 +36,5 @@ be of different type.
 #### Output:
 
 ```
-femalesMoreThan24y = 2
+seasonedMystics = 2
 ```

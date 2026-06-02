@@ -1,33 +1,34 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
-        return List.of(
-                new Footballer("Messi", 32, Gender.MALE, List.of("CF","CAM", "RF")),
-                new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-                new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-                new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-                new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-                new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-                new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-                new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-        );
-    }
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
+    return List.of(
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
+}
 ```
 
-# Find First:
+# Find First
 
-findFirst() returns an Optional for the first entry in the stream; the Optional can, of course, be empty.
+`findFirst` returns an `Optional` holding the first element in encounter order (or empty if none).
+Even on a parallel stream it respects ordering, so the result is deterministic.
 
 ```java
-        Integer findFirst = List.of(4, 1, 3, 7, 5, 6, 2, 28, 15, 29)
-        .parallelStream()
+int firstOverFive = List.of(9, 2, 5, 11, 4, 8, 3, 30, 17, 21).parallelStream()
         .filter(number -> number > 5)
         .findFirst()
-        .get();
+        .orElseThrow();
 
-        System.out.
-
-println("findFirst = "+findFirst);
-//prints findFirst = 7
+System.out.println("firstOverFive = " + firstOverFive);
+// firstOverFive = 9
 ```

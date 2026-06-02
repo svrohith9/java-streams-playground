@@ -123,8 +123,9 @@ a log of game events). Clear a level, earn XP, unlock the next feature. **Full m
 | 8 👑 | **`Optional`** as a safe reduction | 8 | 30 |
 | 9 🧾 | **Text blocks** + `String::formatted` | 15 | 40 |
 | 10 🐉 | **Stream Gatherers** (`scan`) — BOSS | 24/25 | 60 |
+| 11 ⚖️ | **`partitioningBy`** (veterans vs rookies) | 8 | 30 |
 
-**Clear all ten → 330 XP → 🥇 _Modern Stream Sage_ badge.** Challenges live in
+**Clear all eleven → 360 XP → 🥇 _Modern Stream Sage_ badge.** Challenges live in
 [`practice/modern_java`](src/test/java/com/github/streams/practice/modern_java); answer keys are in
 [`ModernJavaSolutions`](src/test/java/com/github/streams/practice/modern_java/ModernJavaSolutions.java).
 

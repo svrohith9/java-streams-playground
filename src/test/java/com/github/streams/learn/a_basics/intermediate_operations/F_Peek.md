@@ -1,42 +1,43 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
     return List.of(
-            new Footballer("Messi", 32, Gender.MALE, List.of("CF", "CAM", "RF")),
-            new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-            new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-            new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-            new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-            new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-            new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-            new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-    );
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
 }
 ```
 
-# Peek:
+# Peek
 
-It performs the specified operation on each element of the stream and returns a new stream which can be used further.
+`peek` lets you observe each element as it flows past — without changing it — and returns the same
+stream. It is meant for debugging/logging, not for side effects your program depends on.
 
-```java        
-        long malePlayerCount = footballerList.stream()
-        .filter(footballer -> footballer.getGender().equals(Gender.MALE))
-        .sorted(Comparator.comparing(Footballer::getAge))
-        .peek(footballer -> {
-            System.out.println("footballer = " + footballer);
-        })
+```java
+long rangerCount = explorers.stream()
+        .filter(explorer -> explorer.guild() == Guild.RANGERS)
+        .sorted(Comparator.comparing(Explorer::age))
+        .peek(explorer -> System.out.println("visiting = " + explorer.name()))
         .count();
 
-        System.out.
-
-println("malePlayerCount = "+malePlayerCount);
-//        prints
-//        footballer = Footballer{name='Surinder', age=20, gender=MALE, positions=[CM, CDM]}
-//        footballer = Footballer{name='Arthur', age=23, gender=MALE, positions=[CM, CAM]}
-//        footballer = Footballer{name='Cristiano Ronaldo', age=27, gender=MALE, positions=[GK]}
-//        footballer = Footballer{name='Ibrahim', age=28, gender=MALE, positions=[CF, CAM, LF]}
-//        footballer = Footballer{name='Messi', age=32, gender=MALE, positions=[CF, CAM, RF]}
-//        malePlayerCount = 5
+System.out.println("rangerCount = " + rangerCount);
+// visiting = Idris
+// visiting = Bram
+// visiting = Theron
+// visiting = Doran
+// visiting = Kael
+// rangerCount = 5
 ```
 
+> ⚠️ Because `peek` exists only for its side effect, some terminal operations may skip it when the
+> result can be computed without traversing every element. Never rely on it for real work.

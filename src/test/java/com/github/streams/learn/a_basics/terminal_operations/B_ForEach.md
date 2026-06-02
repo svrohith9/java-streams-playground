@@ -1,38 +1,31 @@
 # Data Set
 
 ```java
-   List<Footballer> getFootballers() {
-        return List.of(
-                new Footballer("Messi", 32, Gender.MALE, List.of("CF","CAM", "RF")),
-                new Footballer("Ibrahim", 28, Gender.MALE, List.of("CF", "CAM", "LF")),
-                new Footballer("Arthur", 23, Gender.MALE, List.of("CM", "CAM")),
-                new Footballer("Cristiano Ronaldo", 27, Gender.MALE, List.of("GK")),
-                new Footballer("Surinder", 20, Gender.MALE, List.of("CM", "CDM")),
-                new Footballer("Jennifer", 29, Gender.FEMALE, List.of("CF", "CAM")),
-                new Footballer("Jana", 17, Gender.FEMALE, List.of("CB")),
-                new Footballer("Alexia", 25, Gender.FEMALE, List.of("CAM", "RF", "LF"))
-        );
-    }
+enum Guild { RANGERS, MYSTICS }
+
+record Explorer(String name, int age, Guild guild, List<String> skills) {}
+
+List<Explorer> getExplorers() {
+    return List.of(
+            new Explorer("Kael",   32, Guild.RANGERS, List.of("Tracking", "Archery", "Climbing")),
+            new Explorer("Doran",  28, Guild.RANGERS, List.of("Tracking", "Archery", "Foraging")),
+            new Explorer("Bram",   23, Guild.RANGERS, List.of("Climbing", "Archery")),
+            new Explorer("Theron", 27, Guild.RANGERS, List.of("Diving")),
+            new Explorer("Idris",  20, Guild.RANGERS, List.of("Climbing", "Cartography")),
+            new Explorer("Lyra",   29, Guild.MYSTICS, List.of("Tracking", "Archery")),
+            new Explorer("Mira",   17, Guild.MYSTICS, List.of("Runecraft")),
+            new Explorer("Senna",  25, Guild.MYSTICS, List.of("Archery", "Diving", "Foraging")));
+}
 ```
 
-# For Each:
+# For Each
 
-It loops over the stream elements, calling the supplied function on each element.
+`forEach` performs an action on every element. On a **parallel** stream it makes no ordering
+guarantee — actions may run on different threads in any order. If order matters, see `forEachOrdered`.
 
 ```java
-        List.of(4,1,6,7,19,2,3,81,64).stream()
-                .parallel()
-                .filter(number -> number<65)
-                .forEach(number -> System.out.println("number = " + number));
-                //prints
-                //forEach
-                //number = 2
-                //number = 19
-                //number = 3
-                //number = 4
-                //number = 6
-                //number = 7
-                //number = 1
-                //number = 64
+List.of(5, 2, 8, 9, 21, 3, 4, 72, 55).parallelStream()
+        .filter(number -> number < 60)
+        .forEach(number -> System.out.println("number = " + number));
+// Prints 5, 2, 8, 9, 21, 3, 4, 55 in an unspecified order (it varies run to run).
 ```
-

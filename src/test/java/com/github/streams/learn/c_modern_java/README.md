@@ -23,8 +23,9 @@ to one real language or API feature and one runnable challenge.
 | 8 | 👑 | **`Optional`** as a safe reduction result | 8 | `Level8_OptionalChallenge` | 30 |
 | 9 | 🧾 | **Text blocks** + `String::formatted` | 15 | `Level9_TextBlocksChallenge` | 40 |
 | 10 | 🐉 | **Stream Gatherers** (`scan`) — BOSS | 24/25 | `Level10_GatherersChallenge` | 60 |
+| 11 | ⚖️ | **`partitioningBy`** (veterans vs rookies) | 8 | `Level11_PartitioningChallenge` | 30 |
 
-**Total: 330 XP** · Clear all ten to earn the 🥇 *Modern Stream Sage* badge.
+**Total: 360 XP** · Clear all eleven to earn the 🥇 *Modern Stream Sage* badge.
 
 ---
 
