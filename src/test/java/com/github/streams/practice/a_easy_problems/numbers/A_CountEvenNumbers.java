@@ -21,7 +21,7 @@ class A_CountEvenNumbers {
     final var input = List.of(1, 2, 3, 4, 5, 6, 7);
 
     final var mySolution = EasyNumbersProblemSolution.countNumberOfEvenNumbers(input);
-    final var yourSolution = -1L; // WRITE YOUR IMPLEMENTATION HERE//
+    final var yourSolution =input.stream().filter(x->(x%2==0)).count();
 
     Assertions.assertEquals(
         mySolution,

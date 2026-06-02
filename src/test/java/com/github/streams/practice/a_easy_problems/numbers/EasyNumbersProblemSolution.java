@@ -105,4 +105,20 @@ public class EasyNumbersProblemSolution {
     public static List<String> uniqueEmailAddresses(List<String> input) {
       return input.stream().distinct().toList();
     }
+
+  public static int maxValue(final List<Integer> input) {
+    return input.stream().mapToInt(Integer::intValue).max().orElseThrow();
+  }
+
+  public static int minValue(final List<Integer> input) {
+    return input.stream().mapToInt(Integer::intValue).min().orElseThrow();
+  }
+
+  public static long sumOfSquaresOfEvenNumbers(final List<Integer> input) {
+    return input.stream().filter(x -> x % 2 == 0).mapToLong(x -> (long) x * x).sum();
+  }
+
+  public static long productOfNumbers(final List<Integer> input) {
+    return input.stream().reduce(1, (a, b) -> a * b);
+  }
 }

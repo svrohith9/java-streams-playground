@@ -1,144 +1,195 @@
-# Java Stream API Exercises and Practices
+<div align="center">
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub forks](https://img.shields.io/github/forks/ZahidFKhan/Streams-API-Practices?logo=github)](https://github.com/ZahidFKhan/Streams-API-Practices)
-[![GitHub stars](https://img.shields.io/github/stars/ZahidFKhan/Streams-API-Practices?logo=github)](https://github.com/ZahidFKhan/Streams-API-Practices)
+# 🎮 Java Streams Playground
 
-___
+### Learn the **Java Stream API** and **Modern Java (8 → 25)** by clearing gamified, test-driven challenges.
 
-## How to use? 🛠️
+*Records · Sealed Types · Pattern Matching · Record Patterns · Sequenced Collections · Gatherers · Virtual Threads*
 
-1. Fork this repository.
-2. Remove the `@Disabled` Tags.
-3. Solve the Problem.
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Java](https://img.shields.io/badge/Java-8%20→%2025-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![Build](https://img.shields.io/badge/Build-Maven-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
+[![Tests](https://img.shields.io/badge/Tests-JUnit_5-25A162?logo=junit5&logoColor=white)](https://junit.org/junit5/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
+[![Star this repo](https://img.shields.io/badge/⭐-Star_this_repo-yellow.svg)](#)
 
-##### NOTE: Don't forget to rate this to bookmark.
+**If this helps you learn, please ⭐ star the repo — it helps others find it too!**
 
----
-
-### Basic Streams Operations
-
-If you're new to the Java Stream API and want to learn the fundamentals, check out our dedicated beginner's section with
-foundational exercises and explanations:
-
-[Beginner's Guide to Java Streams](https://github.com/ZahidFKhan/Streams-API-Practices/tree/main/src/test/java/com/github/streams/learn/basics)
+</div>
 
 ---
 
-### Advance Your Skills: Dedicated Practice Area
+## ✨ Why this repo?
 
-Once you've grasped the basics, it's time to solidify your understanding with practical application. This section
-provides a range of hands-on exercises designed to enhance your problem-solving abilities with the Java Stream API:
+Most stream tutorials are walls of text. This one is a **playground**: every concept comes with a
+small, runnable JUnit test you actually solve. You start from the basics and level up all the way to
+the newest Java features — **records, sealed types, pattern matching, record patterns, sequenced
+collections, and Stream Gatherers**.
 
-[Dive into Stream API Practice Challenges](https://github.com/ZahidFKhan/Streams-API-Practices/tree/main/src/test/java/com/github/streams/practice)
-
-Challenge yourself and refine your functional programming prowess!
-
----
-
-### Understanding Functional Interfaces
-
-Functional Interfaces are a cornerstone of Java's functional programming capabilities. If you're ready to delve deeper
-into how they work and their role in the Stream API, visit this dedicated section:
-
-[Explore Java Functional Interfaces](https://github.com/ZahidFKhan/Streams-API-Practices/tree/main/src/test/java/com/github/streams/learn/functional_interfaces)
+- 🧩 **Test-driven** — each exercise is a `@Disabled` JUnit test. Enable it, solve it, run it green.
+- 🎮 **Gamified** — a "Stream Quest" learning track with levels, XP and badges.
+- 🆕 **Modern** — covers Java 8 through **Java 25**, including the brand-new Gatherers API.
+- 📈 **Progressive** — Easy → Medium → Hard, plus a guided beginner's section.
+- 🔑 **Answer keys included** — every problem has a reference solution to compare against.
 
 ---
 
-### Interview Preparation: Stream API Questions
+## 📑 Table of Contents
 
-Preparing for a Java interview? Practice common Stream API questions and scenarios here:
+1. [Quick Start](#-quick-start)
+2. [How It Works](#-how-it-works)
+3. [Learning Paths](#-learning-paths)
+4. [🎮 Stream Quest — Modern Java Track](#-stream-quest--modern-java-track)
+5. [Modern Java Feature Coverage](#-modern-java-feature-coverage)
+6. [Project Structure](#-project-structure)
+7. [Contributing](#-contributing)
+8. [License & Credits](#-license--credits)
 
-[Practice Stream API Interview Questions](https://github.com/ZahidFKhan/Streams-API-Practices/tree/main/src/test/java/com/github/streams/interview)
+---
 
---- 
+## 🚀 Quick Start
 
-[//]: # (### Master the Java Stream API: Exercises, Tutorials, and Practical Examples)
+> **Prerequisites:** JDK 21+ for most exercises. The Stream Gatherers exercises require **JDK 25**
+> (they are gated with `@EnabledOnJre(JRE.JAVA_25)`, so everything else still builds on JDK 21).
 
-[//]: # ()
+```bash
+# 1. Clone
+git clone https://github.com/svrohith9/java-streams-playground.git
+cd java-streams-playground
 
-[//]: # (This repository offers a comprehensive collection of functional programming exercises and practical examples designed to)
+# 2. Pick a challenge, e.g. an easy one
+#    src/test/java/com/github/streams/practice/a_easy_problems/numbers/A_CountEvenNumbers.java
 
-[//]: # (help you master the Java Stream API and write cleaner, more efficient code.)
+# 3. Remove @Disabled, write your solution in `yourSolution`, then run:
+mvn test
+```
 
-[//]: # ()
+That's it — green test = challenge cleared. ✅
 
-[//]: # (---)
+---
 
-[//]: # ()
+## 🧭 How It Works
 
-[//]: # (### Learn and Practice the Java Stream API: From Basics to Advanced)
+Every exercise follows the same friendly shape:
 
-[//]: # ()
+```java
+@Test
+@Disabled                         // ← (1) delete this to activate the challenge
+void countEvenNumbers() {
+  final var input = List.of(1, 2, 3, 4, 5, 6, 7);
 
-[//]: # (This repository serves as your ultimate guide to understanding and effectively utilizing the Java Stream API. Whether)
+  final var mySolution = EasyNumbersProblemSolution.countNumberOfEvenNumbers(input); // reference answer
+  final var yourSolution = -1L;   // ← (2) replace with your own stream pipeline
 
-[//]: # (you're a beginner looking to grasp the fundamentals or an experienced developer aiming to deepen your knowledge, you'll)
+  Assertions.assertEquals(mySolution, yourSolution); // ← (3) run the test to check
+}
+```
 
-[//]: # (find valuable resources here. Dive into practical exercises that cover a wide range of Stream API operations and)
+1. **Remove `@Disabled`.**
+2. **Write your pipeline** in `yourSolution`.
+3. **Run the test.** It compares against the reference `mySolution` answer key.
 
-[//]: # (real-world scenarios.)
+---
 
-[//]: # ()
+## 🗂️ Learning Paths
 
-[//]: # (### What you'll find:)
+| Path | What you'll practice | Location |
+|------|----------------------|----------|
+| 📘 **Beginner's Guide** | `filter`, `map`, `flatMap`, `reduce`, `collect`, and every core operation, explained | [`learn/a_basics`](src/test/java/com/github/streams/learn/a_basics) |
+| 🟢 **Easy** | Numbers & strings warm-ups | [`practice/a_easy_problems`](src/test/java/com/github/streams/practice/a_easy_problems) |
+| 🟡 **Medium** | Grouping, partitioning, employee/department analytics | [`practice/b_medium_problems`](src/test/java/com/github/streams/practice/b_medium_problems) |
+| 🔴 **Hard** | Prime streams, longest consecutive sequence, and more | [`practice/c_hard_problems`](src/test/java/com/github/streams/practice/c_hard_problems) |
+| 🧠 **Functional Interfaces** | `Predicate`, `Function`, `Supplier`, `Comparator`, … | [`practice/functional_interfaces`](src/test/java/com/github/streams/practice/functional_interfaces) |
+| ⚡ **Gatherers (JDK 25)** | `scan`, `fold`, `windowFixed`, `windowSliding` | [`practice/gatherers`](src/test/java/com/github/streams/practice/gatherers) |
+| 🎮 **Stream Quest** | Modern Java, gamified (see below) | [`learn/c_modern_java`](src/test/java/com/github/streams/learn/c_modern_java) |
 
-[//]: # ()
+---
 
-[//]: # (* **Targeted Exercises:** Hands-on problems designed to reinforce your understanding of key Stream API concepts)
+## 🎮 Stream Quest — Modern Java Track
 
-[//]: # (  like `map`, `filter`, `reduce`, `collect`, and more.)
+A gamified, step-by-step path through modern Java using one tiny RPG dataset (a party of heroes and
+a log of game events). Clear a level, earn XP, unlock the next feature. **Full map:**
+[`learn/c_modern_java`](src/test/java/com/github/streams/learn/c_modern_java/README.md).
 
-[//]: # (* **Practical Examples:** Learn how to apply the Stream API to solve common programming tasks, making your code more)
+| Lvl | Feature | Since | XP |
+|----:|---------|:-----:|---:|
+| 1 🧱 | **Records** as stream elements | 16 | 10 |
+| 2 ⚔️ | **Pattern matching for `switch`** over a `sealed` type | 21 | 20 |
+| 3 💰 | **Record patterns** (destructuring) | 21 | 30 |
+| 4 🔄 | **Sequenced Collections** (`reversed`/`getFirst`/`getLast`) | 21 | 30 |
+| 5 🎯 | **`teeing`** collector | 12 | 40 |
+| 6 📖 | **`Stream::mapMulti`** | 16 | 40 |
+| 7 🧮 | **`groupingBy` + `counting`** | 8 | 30 |
+| 8 👑 | **`Optional`** as a safe reduction | 8 | 30 |
+| 9 🧾 | **Text blocks** + `String::formatted` | 15 | 40 |
+| 10 🐉 | **Stream Gatherers** (`scan`) — BOSS | 24/25 | 60 |
 
-[//]: # (  concise and readable.)
+**Clear all ten → 330 XP → 🥇 _Modern Stream Sage_ badge.** Challenges live in
+[`practice/modern_java`](src/test/java/com/github/streams/practice/modern_java); answer keys are in
+[`ModernJavaSolutions`](src/test/java/com/github/streams/practice/modern_java/ModernJavaSolutions.java).
 
-[//]: # (* **Beginner-Friendly Approach:** Clear instructions and progressively challenging exercises cater to developers of all)
+---
 
-[//]: # (  skill levels.)
+## 🆕 Modern Java Feature Coverage
 
-[//]: # (* **Focus on Modern Java:** Examples are relevant for Java 8, Java 11, and later versions, showcasing the power of)
+| Version | Feature | Where to practice |
+|:-------:|---------|-------------------|
+| 8  | Streams, `Optional`, `Collectors`, lambdas | `learn/a_basics`, all of `practice` |
+| 9  | `takeWhile` / `dropWhile` / `iterate(seed, pred, next)` | `learn/a_basics/intermediate_operations` |
+| 12 | `Collectors.teeing` | Stream Quest · Level 5 |
+| 15 | Text blocks, `String::formatted` | Stream Quest · Level 9 |
+| 16 | **Records**, `Stream.toList`, `mapMulti` | Stream Quest · Levels 1 & 6 |
+| 17 | **Sealed** classes/interfaces | Stream Quest · Level 2 (`GameEvent`) |
+| 21 | **Pattern matching `switch`**, **record patterns**, **Sequenced Collections** | Stream Quest · Levels 2–4 |
+| 24/25 | **Stream Gatherers** (`scan`, `fold`, `windowFixed`, `windowSliding`, `mapConcurrent`) | `practice/gatherers`, Stream Quest · Level 10 |
 
-[//]: # (  functional programming.)
+---
 
-[//]: # ()
+## 📁 Project Structure
 
-[//]: # (___)
+```
+src/test/java/com/github/streams/
+├── learn/                     # Read-first explanations
+│   ├── a_basics/              #   intermediate & terminal operations (markdown)
+│   ├── b_advanced/gatherers/  #   what/why/when + inbuilt gatherers
+│   └── c_modern_java/         #   🎮 Stream Quest map (modern Java)
+└── practice/                  # Solve-it-yourself challenges
+    ├── a_easy_problems/
+    ├── b_medium_problems/
+    ├── c_hard_problems/
+    ├── functional_interfaces/
+    ├── gatherers/             #   scan, fold, windowFixed, windowSliding (JDK 25)
+    └── modern_java/           #   🎮 Stream Quest challenges + quest/ game model
+```
 
-[//]: # ()
+---
 
-[//]: # (##### Keywords for Java Stream API Learning)
+## 🤝 Contributing
 
-[//]: # ()
+Contributions are very welcome — new problems, better explanations, more modern-Java levels!
 
-[//]: # (<a name="keywords-for-java-stream-api-learning"></a>)
+1. Fork the repo and create a branch.
+2. Add your exercise following the existing pattern (a `@Disabled` test + a reference solution).
+3. Keep new Java 25-only code gated with `@EnabledOnJre(JRE.JAVA_25)`.
+4. Open a pull request describing what learners will gain.
 
-[//]: # ()
+Found a bug or have an idea? [Open an issue](https://github.com/svrohith9/java-streams-playground/issues).
 
-[//]: # (1. [x] Java Stream API Tutorial)
+---
 
-[//]: # (2. [x] Java 8 Streams)
+## 📜 License & Credits
 
-[//]: # (3. [x] Java 11 Streams)
+Released under the [Apache License 2.0](LICENSE).
 
-[//]: # (4. [x] Functional Programming in Java)
+Built on the excellent original
+[Streams-API-Practices](https://github.com/ZahidFKhan/Streams-API-Practices) by **ZahidFKhan**, and
+extended here with a gamified **Modern Java (Stream Quest)** learning track and Java 25 Gatherers
+coverage.
 
-[//]: # (5. [x] Java Stream API Exercises)
+<div align="center">
 
-[//]: # (6. [x] Java Stream API Practices)
+### ⭐ Found this useful? Star the repo and share it with someone learning Java Streams!
 
-[//]: # (7. [x] Java Code Examples)
+`#java` · `#streams` · `#functional-programming` · `#modern-java` · `#java25` · `#learn-to-code`
 
-[//]: # (8. [x] Learn Java Streams)
-
-[//]: # (9. [x] Master Java Stream API)
-
-[//]: # (10. [x] Java Programming Skills)
-
-[//]: # ()
-
-[//]: # (Your support helps others discover and benefit from these resources.)
-
-## Java Stream API: `Write less, do more with your data`.
-
-> "What needs to be done rather than how it needs to be done."
+</div>

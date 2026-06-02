@@ -9,6 +9,12 @@ import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
 
 
+/// The scan gatherer is an intermediate stream operation that emits the running accumulation after
+// each element — a "prefix sum" generalized to any combining function. Element N of the output is
+// the fold of input elements 0..N.
+///
+/// Here each output is the concatenation of all digits seen so far.
+///
 class ScanTest {
   @Test
   @EnabledOnJre(JRE.JAVA_25)

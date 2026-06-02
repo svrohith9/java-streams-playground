@@ -80,4 +80,23 @@ public class StringProblemsSolution {
   public static String convertListOfCharactersToString(Collection<Character> listOfCharacters) {
     return listOfCharacters.stream().map(Object::toString).reduce("", String::concat);
   }
+
+  public static long countWords(String input) {
+    return Arrays.stream(input.trim().split("\\s+")).filter(word -> !word.isBlank()).count();
+  }
+
+  public static boolean isPalindrome(String input) {
+    final var cleaned = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+    return cleaned.contentEquals(new StringBuilder(cleaned).reverse());
+  }
+
+  public static String capitalizeEachWord(String input) {
+    return Arrays.stream(input.split(" "))
+        .map(
+            word ->
+                word.isEmpty()
+                    ? word
+                    : Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+        .collect(Collectors.joining(" "));
+  }
 }
