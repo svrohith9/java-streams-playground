@@ -18,7 +18,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.plugin.validation>BRIEF</maven.plugin.validation>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
-        <lombok.version>1.18.46</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
         <datafaker.version>2.5.4</datafaker.version>
     </properties>
     <dependencies>
